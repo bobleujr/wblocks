@@ -46,7 +46,6 @@ public class BlocksFunctionFactory {
 	private static class BlocksActionsFunction implements ActionsFunction {
 		public Set<Action> actions(Object state) {
 			BlocksState board = (BlocksState) state;
-
 			Set<Action> actions = new LinkedHashSet<Action>();
 			if(board.function.contains("clear(A)")) {
 				if(board.function.contains("clear(0)")) {
@@ -697,4 +696,5 @@ public class BlocksFunctionFactory {
 			return s;
 		}
 	}
+
 }
