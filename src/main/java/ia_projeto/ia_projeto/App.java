@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * @author Daniel
  * @author Paulo
  */
-public class App {
+public class App{
+
 	
 	/**
 	 * This class will create initial and goals char matrices
@@ -38,17 +39,20 @@ public class App {
     	goalFunction.add("clear(0)");
     	goalFunction.add("on(A,table)");
     	goalFunction.add("on(D,A)");
-    	stateFunction.add("clear(D)");
+    	goalFunction.add("clear(D)");
     	goalFunction.add("clear(2)");
     	goalFunction.add("on(B,table)");
     	goalFunction.add("on(C,B)");
-    	stateFunction.add("clear(C)");
+    	goalFunction.add("clear(C)");
     	
     	BlocksState state = new BlocksState(mapState, 4, 4, stateFunction);
         BlocksGoalTest goal = new BlocksGoalTest(mapGoal, 4, 4, goalFunction);
-        
-        state.printState();
-        goal.printState();
-        
+      
+        while(!goal.isGoalState(state.function())) {
+        	state.printState();
+            goal.printState();
+        	BlocksFunctionFactory.getActionsFunction();
+        	BlocksFunctionFactory.getResultFunction();
+        }
     }
 }
