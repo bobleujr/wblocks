@@ -8,7 +8,6 @@ import java.awt.Color;
  * @author Andre
  * @author Daniel
  * @author Paulo
- *
  */
 public class Block extends Item{
 	
@@ -24,9 +23,10 @@ public class Block extends Item{
 	 * @param height Its height
 	 * @param under	Who is under it (block or table)
 	 * @param id Its ID
+	 * @param position Its position in table (-1 if it's the table)
 	 */
-	Block(Color color, double x, double y, int width, int height, Item under, char id) {
-		super(null, under, color);
+	Block(Color color, double x, double y, int width, int height, Item under, char id, int position) {
+		super(null, under, color, position);
 		this.rect = new Rectangle2D.Double(x, y, width, height);
 		this.id = id;
 		super.shape(rect);
@@ -38,6 +38,5 @@ public class Block extends Item{
 	 */
 	public char id() {
 		return this.id;
-	}
-
+	}	
 }
