@@ -4,7 +4,9 @@ import java.awt.geom.Line2D;
 
 /**
  * Table class stores creates a line in space
- * @author Andre, Daniel, Paulo
+ * @author Andre
+ * @author Daniel
+ * @author Paulo
  */
 public class Table extends Item{
 
@@ -19,7 +21,7 @@ public class Table extends Item{
 	 * @param under Who is under it (null)
 	 */
 	Table(double x1, double y1, double x2, double y2, Item under) {
-		super(null, under, null);
+		super(null, under, null,-1);
 		this.line = new Line2D.Double(x1, y1, x2, y2);
 		super.shape(this.line);
 	}
