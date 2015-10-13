@@ -65,7 +65,7 @@ public class BlocksState extends State{
     	for(int i = 0; i < state.world()[0].length; i++) {
     		System.out.print('=');
     	}
-    	System.out.println();
+    	System.out.println();	
     	
     	for (String s : function) {
     		System.out.println(s);

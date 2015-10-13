@@ -27,12 +27,12 @@ public class BlocksGoalTest extends State implements GoalTest{
 	 * Return true if the current world is equal to goal world
 	 */
 	public boolean isGoalState(Object currentState) {
-		if(state().equals((World) currentState)) {
-			return true;
+		for(String s : (ArrayList<String>) currentState) {
+			if(!function().contains(s)) {
+				return false;
+			}
 		}
-		else {
-			return false;
-		}
+		return true;
 	}
 
 
