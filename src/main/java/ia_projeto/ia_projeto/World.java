@@ -29,8 +29,8 @@ public class World {
 		this.world = world;
 		this.top = new Item[sizeTable];
 		this.blocks = new Block[numberBlocks];
-		//table = new Table(50, (sizeTable*100) - 50, (100*sizeTable) - 50, (sizeTable*100) - 50, null);
-		//createBlocks(sizeTable);
+		table = new Table(50, (sizeTable*100) - 50, (100*sizeTable) - 50, (sizeTable*100) - 50, null);
+		createBlocks(sizeTable);
 	}
 	
 	/**
@@ -47,6 +47,20 @@ public class World {
 	 */
 	public Block[] blocks() {
 		return this.blocks;
+	}
+	
+	/**
+	 * Get a block by its ID
+	 * @param ID Block's ID
+	 * @return Block or null
+	 */
+	public Block blocks(char ID) {
+		for(Block b : blocks) {
+			if(b.id() == ID) {
+				return b;
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -67,7 +81,7 @@ public class World {
 			for(int j = 0; j < this.world[i].length; j++) {
 				if(i == 0) { 
 					if(this.world[i][j] != ' ') {
-						this.blocks[index] = new Block(getNewColor(), 100 + j*50, (100*sizeTable) - 100, 50, 50, this.table, this.world[i][j]);
+						this.blocks[index] = new Block(getNewColor(), 100 + j*50, (100*sizeTable) - 100, 50, 50, this.table, this.world[i][j], j);
 						this.top[j] = this.blocks[index];
 						index++;
 					}
@@ -84,7 +98,7 @@ public class World {
 								break;
 							};
 						}
-						this.blocks[index] = new Block(getNewColor(), 100 + j*50, (100*sizeTable) - (100 + 50*i), 50, 50, under, this.world[i][j]);
+						this.blocks[index] = new Block(getNewColor(), 100 + j*50, (100*sizeTable) - (100 + 50*i), 50, 50, under, this.world[i][j], j);
 						this.top[j] = this.blocks[index];
 						index++;
 					}
@@ -129,6 +143,7 @@ public class World {
 			this.top[x] = b.on();
 			b.on(this.top[y]);
 			this.top[y] = b;
+			b.position(y);
 		}
 	}
 	
@@ -154,12 +169,13 @@ public class World {
 		if(b == this.table) {
 			return true;
 		}
-		for(int i = 0; i < blocks.length; i++) {
-			if(blocks[i].on() == b) {
-				return false;
+		if(this.top[b.position] == b) {
+			if(b.on() == this.table) {
+				return true;
 			}
+			else return false;
 		}
-		return true;
+		else return false;
 	}
 	
 	/**
