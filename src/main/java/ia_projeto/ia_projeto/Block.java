@@ -1,35 +1,43 @@
 package ia_projeto.ia_projeto;
 
-public class Block {
-	private char id;
-	private Block on;
-	private boolean clear;
+import java.awt.geom.Rectangle2D;
+import java.awt.Color;
+
+/**
+ * Block class stores its ID and creates a rectangle in space
+ * @author Andre
+ * @author Daniel
+ * @author Paulo
+ *
+ */
+public class Block extends Item{
 	
-	public Block(char id, Block on) {
-		super();
-		this.id = id;
-		this.on = on;
-	}
+	private Rectangle2D.Double rect; //A 2D rectangle
+	private char id;				 //ID for a block
 	
-	public char getId() {
-		return id;
-	}
-	public void setId(char id) {
+	/**
+	 * Constructor for a block
+	 * @param color Its Color
+	 * @param x Its X-position in space
+	 * @param y Its Y-position in space
+	 * @param width Its width
+	 * @param height Its height
+	 * @param under	Who is under it (block or table)
+	 * @param id Its ID
+	 */
+	Block(Color color, double x, double y, int width, int height, Item under, char id) {
+		super(null, under, color);
+		this.rect = new Rectangle2D.Double(x, y, width, height);
 		this.id = id;
-	}
-	public Block getOn() {
-		return on;
-	}
-	public void setOn(Block on) {
-		this.on = on;
+		super.shape(rect);
 	}
 
-	public boolean isClear() {
-		return clear;
+	/**
+	 * Get ID
+	 * @return Blocks' ID 
+	 */
+	public char id() {
+		return this.id;
 	}
 
-	public void setClear(boolean clear) {
-		this.clear = clear;
-	}
-	
 }
